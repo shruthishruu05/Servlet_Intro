@@ -29,7 +29,8 @@ public class LoginServlet  extends HttpServlet {
         // get servlet config init params
         String userID = getServletConfig().getInitParameter("user");
         String password = getServletConfig().getInitParameter("password");
-        if(userID.equals(user) && password.equals(pwd)) {
+        String nameRegex = "^[A-Z][a-z]{2,}";
+        if(userID.equals(user) && userID.matches(nameRegex) && password.equals(pwd)) {
             req.setAttribute("user",user);
             req.getRequestDispatcher("LoginSuccess.jsp").forward(req, resp);
         } else {
@@ -40,4 +41,6 @@ public class LoginServlet  extends HttpServlet {
         }
 
     }
+
 }
+
