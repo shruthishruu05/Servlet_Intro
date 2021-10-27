@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
         urlPatterns = { "/LoginServlet" },
         initParams = {
                 @WebInitParam(name = "user", value = "Shruthi"),
-                @WebInitParam(name = "password", value = "BridgeLabz")
+                @WebInitParam(name = "password", value = "Shru@1999")
         }
 )
 public class LoginServlet  extends HttpServlet {
@@ -30,7 +30,11 @@ public class LoginServlet  extends HttpServlet {
         String userID = getServletConfig().getInitParameter("user");
         String password = getServletConfig().getInitParameter("password");
         String nameRegex = "^[A-Z][a-z]{2,}";
-        if(userID.equals(user) && userID.matches(nameRegex) && password.equals(pwd)) {
+
+        // UC4 : Validating password of the user
+        String pwdRegex = "^(?=.*[0-9])(?=[^@#$%^&+=]*[@#$%^&+=][^@#$%^&+=]*$)(?=.*[a-z])(?=.*[A-Z]).{8,}$";
+
+        if(userID.equals(user) && userID.matches(nameRegex) && password.equals(pwd) && password.matches(pwdRegex)){
             req.setAttribute("user",user);
             req.getRequestDispatcher("LoginSuccess.jsp").forward(req, resp);
         } else {
